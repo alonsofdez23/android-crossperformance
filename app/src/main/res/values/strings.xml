@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Cross Performance</string>
+
+    <!--MAIN ACTIVITY-->
+    <string name="Btn_Login">Login</string>
+    <string name="Btn_Registro">Registro</string>
+
+    <!--Actividad Registro-->
+    <string name="CrearcuentaTXT">Crear Cuenta</string>
+    <string name="NombreEt">Nombre</string>
+    <string name="CorreoEt">Email</string>
+    <string name="ContraseñaEt">Password</string>
+    <string name="ConfirmarContraseñaEt">Confirmar Password</string>
+    <string name="RegistrarUsuario">Registrar</string>
+    <string name="TengounacuentaTXT">Tengo una cuenta</string>
+
+    <!-- Menu principal-->
+    <string name="CerrarSesion">Cerrar Sesion</string>
+
+    <!--Activity de Login-->
+    <string name="InciarSesion">Iniciar Sesion</string>
+    <string name="LoginCorreo">Email</string>
+    <string name="ContrasenaLogin">Password</string>
+    <string name="BotonLogin">Iniciar Sesion</string>
+    <string name="BotonLoginReg">¿No te has registrado?. Toca aqui</string>
+
+</resources>

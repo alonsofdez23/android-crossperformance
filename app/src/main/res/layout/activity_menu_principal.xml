@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="Menu usuario normal"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/CerrarSesion"
+            android:id="@+id/CerrarSesion"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
