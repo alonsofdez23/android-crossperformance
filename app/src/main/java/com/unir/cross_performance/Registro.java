@@ -95,21 +95,6 @@ public class Registro extends AppCompatActivity {
 
         // Registra usuario
         registerUsuario();
-
-        // Crear un usuario en firebase
-//        firebaseAuth.createUserWithEmailAndPassword(correo, password)
-//                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                    @Override
-//                    public void onSuccess(AuthResult authResult) {
-//                        // Guardar información del usuario en la base de datos
-//                        GuardarInformacion();
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(Registro.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
     }
 
     private void registerUsuario() {

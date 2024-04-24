@@ -26,13 +26,9 @@ import retrofit2.Response;
 public class MenuAdministradorActivity extends AppCompatActivity {
 
     Button CerrarSesion;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser user;
 
     // Conexión API REST
     ApiClient apiclient = new ApiClient();
-    // Request (email, password)
-    LoginRequest loginRequest = new LoginRequest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +36,6 @@ public class MenuAdministradorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_administrador);
 
         CerrarSesion = findViewById(R.id.CerrarSesion);
-        firebaseAuth = FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
 
         CerrarSesion.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,14 +46,10 @@ public class MenuAdministradorActivity extends AppCompatActivity {
     }
 
     private void SalirAplicacion() {
-        System.out.println("SalirAplicacion");
         apiclient.logoutUser(new Callback<LogoutResponse>() {
             @Override
             public void onResponse(Call<LogoutResponse> call, Response<LogoutResponse> response) {
                 if (response.isSuccessful()) {
-                    String msg = response.body().getMessage();
-                    System.out.println(msg);
-
                     Toast.makeText(MenuAdministradorActivity.this, "Token borrado correctamente", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MenuAdministradorActivity.this, MainActivity.class));
                 } else {
@@ -75,11 +65,5 @@ public class MenuAdministradorActivity extends AppCompatActivity {
                 Toast.makeText(MenuAdministradorActivity.this, "Request ERROR", Toast.LENGTH_SHORT).show();
             }
         });
-
-        //firebaseAuth.signOut();
-        //startActivity(new Intent(MenuAdministradorActivity.this,MainActivity.class));
-        //Toast.makeText(this,"Has cerrado la sesion", Toast.LENGTH_SHORT).show();
     }
-
-
 }

@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.unir.cross_performance.Model.AuthResponse;
 import com.unir.cross_performance.Model.LoginRequest;
 import com.unir.cross_performance.Utils.ApiClient;
+import com.unir.cross_performance.Utils.TokenManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +23,6 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
     EditText CorreoLogin, ContrasenaLogin;
     Button BotonLogin, BotonLoginReg;
-    FirebaseAuth firebaseAuth;
     String correo = "", password = "";
 
     // Conexión API REST
@@ -39,8 +39,6 @@ public class Login extends AppCompatActivity {
         ContrasenaLogin = findViewById(R.id.ContrasenaLogin);
         BotonLoginReg = findViewById(R.id.BotonLoginReg);
         BotonLogin = findViewById(R.id.BotonLogin);
-
-        firebaseAuth = FirebaseAuth.getInstance();
 
         BotonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +63,7 @@ public class Login extends AppCompatActivity {
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Introduzca Contraseña", Toast.LENGTH_SHORT).show();
         } else {
-            // Prepara request
+            // Prepara loginRequest
             loginRequest.setEmail(correo);
             loginRequest.setPassword(password);
 
@@ -81,6 +79,10 @@ public class Login extends AppCompatActivity {
                     AuthResponse authResponse = response.body();
                     System.out.println(response.code());
                     System.out.println(authResponse.getToken());
+
+                    // Almacena Bearer token
+                    TokenManager.getInstance().setToken(authResponse.getToken());
+
                     Toast.makeText(Login.this, "Bienvenid@: " + correo, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Login.this, MenuAdministradorActivity.class));
                 } else {
@@ -97,47 +99,5 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "Fallo en la solicitud", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        firebaseAuth.signInWithEmailAndPassword(correo, password)
-//                .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            FirebaseUser user = firebaseAuth.getCurrentUser();
-//                            // Obtener el UID del usuario
-//                            String uid = user.getUid();
-//                            // Obtener el rol del usuario desde la base de datos o Firestore
-//                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("usuarios").child(uid);
-//                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                    if (snapshot.exists()) {
-//                                        String rol = snapshot.child("rol").getValue(String.class);
-//                                        // Determinar qué actividad abrir según el rol
-//                                        if (rol.equals("Administrador")) {
-//                                            startActivity(new Intent(Login.this, MenuAdministradorActivity.class));
-//                                        } else {
-//                                            startActivity(new Intent(Login.this, MenuPrincipal.class));
-//                                        }
-//                                        Toast.makeText(Login.this, "Bienvenid@: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-//                                        finish();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError error) {
-//                                    // Manejar errores de lectura de la base de datos
-//                                }
-//                            });
-//                        } else {
-//                            Toast.makeText(Login.this, "No ha introducido sus datos correctamente", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(Login.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
     }
 }

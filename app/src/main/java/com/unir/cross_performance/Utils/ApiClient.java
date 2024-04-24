@@ -10,9 +10,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.22.23:8000";
-    // Token Alonso ID 1
-    private String authToken = "71|AZdMH7mGnyys1ll853a8GLE2ItVRoSwXKXsk16mWb4d192f0";
+    private static final String BASE_URL = "http://192.168.0.31:8001";
+    // Bearer token
+    String authToken = TokenManager.getInstance().getToken();
 
     private ApiService apiService;
 

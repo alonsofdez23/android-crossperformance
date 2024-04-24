@@ -16,19 +16,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MenuPrincipal extends AppCompatActivity {
-
-
     Button CerrarSesion;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_administrador);
 
         CerrarSesion = findViewById(R.id.CerrarSesion);
-        firebaseAuth = FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
 
         CerrarSesion.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -39,9 +34,7 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
     private void SalirAplicacion() {
-        firebaseAuth.signOut();
-        startActivity(new Intent(MenuPrincipal.this,MainActivity
-                .class));
+        startActivity(new Intent(MenuPrincipal.this,MainActivity.class));
         Toast.makeText(this,"Has cerrado la sesion", Toast.LENGTH_SHORT).show();
     }
 
