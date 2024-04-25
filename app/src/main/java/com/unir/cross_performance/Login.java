@@ -84,7 +84,8 @@ public class Login extends AppCompatActivity {
                     TokenManager.getInstance().setToken(authResponse.getToken());
 
                     Toast.makeText(Login.this, "Bienvenid@: " + correo, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this, MenuAdministradorActivity.class));
+                    //startActivity(new Intent(Login.this, MenuAdministradorActivity.class));
+                    startActivity(new Intent(Login.this, ClaseLista.class));
                 } else {
                     AuthResponse authResponse = response.body();
                     System.out.println(authResponse);

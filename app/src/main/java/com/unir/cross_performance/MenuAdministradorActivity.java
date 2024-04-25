@@ -2,6 +2,7 @@ package com.unir.cross_performance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -15,13 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.unir.cross_performance.Model.AuthResponse;
-import com.unir.cross_performance.Model.LoginRequest;
-import com.unir.cross_performance.Model.LogoutResponse;
+import com.unir.cross_performance.Model.*;
 import com.unir.cross_performance.Utils.ApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.List;
 
 public class MenuAdministradorActivity extends AppCompatActivity {
 
@@ -40,7 +41,8 @@ public class MenuAdministradorActivity extends AppCompatActivity {
         CerrarSesion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                SalirAplicacion();
+                //SalirAplicacion();
+                listaTareas();
             }
         });
     }
@@ -63,6 +65,28 @@ public class MenuAdministradorActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LogoutResponse> call, Throwable throwable) {
                 Toast.makeText(MenuAdministradorActivity.this, "Request ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void listaTareas() {
+        apiclient.getClases(new Callback<List<Clase>>() {
+            @Override
+            public void onResponse(Call<List<Clase>> call, Response<List<Clase>> response) {
+                if (response.isSuccessful()) {
+                    List<Clase> clases = response.body();
+                    for (Clase clase : clases) {
+                        System.out.println(clase.getAtletas());
+                        for (Atleta atleta : clase.getAtletas()) {
+                            System.out.println(atleta.toString());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Clase>> call, Throwable throwable) {
+
             }
         });
     }

@@ -1,14 +1,13 @@
 package com.unir.cross_performance.Utils;
 
-import com.unir.cross_performance.Model.AuthResponse;
-import com.unir.cross_performance.Model.LoginRequest;
-import com.unir.cross_performance.Model.LogoutResponse;
-import com.unir.cross_performance.Model.User;
+import com.unir.cross_performance.Model.*;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+
+import java.util.List;
 
 public interface ApiService {
     /* Auth */
@@ -20,4 +19,7 @@ public interface ApiService {
 
     @GET("/api/auth/logout")
     Call<LogoutResponse> logoutUser(@Header("Authorization") String token);
+
+    @GET("/api/clases")
+    Call<List<Clase>> getClases(@Header("Authorization") String token);
 }
